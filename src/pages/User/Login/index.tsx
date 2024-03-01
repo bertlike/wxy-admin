@@ -168,7 +168,7 @@ const Login: React.FC = () => {
           }}
           // logo={<img alt="logo" src="/logo.svg" />}
           title="wxy"
-          subTitle="王星宇后台测试"
+          subTitle="王星宇后台测试11"
           // subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{
             autoLogin: true,
