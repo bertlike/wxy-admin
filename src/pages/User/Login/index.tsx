@@ -15,12 +15,12 @@ import {
   ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
-import { FormattedMessage, history, SelectLang, useIntl, useModel, Helmet } from '@umijs/max';
+import { FormattedMessage, Helmet, SelectLang, useIntl, useModel } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
-import Settings from '../../../../config/defaultSettings';
+import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
-import { createStyles } from 'antd-style';
+import Settings from '../../../../config/defaultSettings';
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -126,7 +126,7 @@ const Login: React.FC = () => {
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
-        history.push(urlParams.get('redirect') || '/');
+        window.location.href = urlParams.get('redirect') || '/';
         return;
       }
       console.log(msg);
@@ -166,21 +166,20 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          // logo={<img alt="logo" src="/logo.svg" />}
-          title="wxy"
-          subTitle="王星宇后台测试"
-          // subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
+          logo={<img alt="logo" src="/logo.svg" />}
+          title="Ant Design"
+          subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{
             autoLogin: true,
           }}
-          // actions={[
-          //   <FormattedMessage
-          //     key="loginWith"
-          //     id="pages.login.loginWith"
-          //     defaultMessage="其他登录方式"
-          //   />,
-          //   <ActionIcons key="icons" />,
-          // ]}
+          actions={[
+            <FormattedMessage
+              key="loginWith"
+              id="pages.login.loginWith"
+              defaultMessage="其他登录方式"
+            />,
+            <ActionIcons key="icons" />,
+          ]}
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);
           }}
